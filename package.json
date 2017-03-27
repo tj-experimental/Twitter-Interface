@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jackton1/Twitter-Interface#readme",
   "dependencies": {
+    "express": "^4.15.2",
     "twit": "^2.2.5"
   },
   "devDependencies": {
