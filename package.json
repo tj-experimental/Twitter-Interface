@@ -22,10 +22,13 @@
   },
   "homepage": "https://github.com/jackton1/Twitter-Interface#readme",
   "dependencies": {
+    "ejs": "^2.5.6",
     "express": "^4.15.2",
+    "jade": "^1.11.0",
     "twit": "^2.2.5"
   },
   "devDependencies": {
+    "ejs": "^2.5.6",
     "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-config-google": "^0.7.1",

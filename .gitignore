@@ -2,4 +2,4 @@
 .sass-cache
 .idea/
 node_modules/
-private_auth/
+public/js/config.js
