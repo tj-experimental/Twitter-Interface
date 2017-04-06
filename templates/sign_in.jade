@@ -1,0 +1,10 @@
+extends ./layout.jade
+
+block content
+    form(method='POST', action="/", enctype='multipart/form-data')
+        div.grid-33.centered
+            label(for="user_name") User Name
+            input#user_name(type="text" name="user_name")
+            label(for="password") Password
+            input#password(type="password" name="password")
+            button#submit-button Sign In

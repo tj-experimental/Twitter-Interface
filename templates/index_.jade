@@ -1,4 +1,11 @@
 extends ./layout.jade
 
 block content
-        p Test Content
+        div.bounds.app--body
+                div.app--section--header
+                        include partials/_timeline_header.jade
+                        include partials/_following_header.jade
+                        include ./partials/_direct_message_header.jade
+
+
+        include ./partials/_tweet.jade
