@@ -4,9 +4,9 @@
 
 $(document).ready(function(){
     var $textArea =  $("#tweet-textarea");
-    var $alertSuccess = $('.alert-success');
-    var $alertWarning = $('.alert-warning');
-    var alerts = [$alertSuccess, $alertWarning];
+    var $alertInfo = $('.alert-info');
+    var $alertError = $('.alert-error');
+    var alerts = [$alertInfo, $alertError];
     // var user,pass;
     // $("#submit").click(function(){
     //     user=$("#user").val();
@@ -19,10 +19,11 @@ $(document).ready(function(){
     //     });
     // });
 
-
+    // Need to fix the flash message always showing up on refresh
     alerts.forEach(function ($element) {
-        if ($element.length !== 0 && $element.css('display') !== 'None'){
-            alert($element.text());
+        if ($element.children('p')[0] !== undefined && $element.children('p')[0].textContent !== ''){
+            alert($element.children('p')[0].textContent );
+            $element.children('p')[0].innerHTML = '';
         }
     });
 

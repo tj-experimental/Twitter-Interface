@@ -4,10 +4,14 @@ var express = require('express'),
     path = require('path'),
     bodyParser = require('body-parser'),
     EventEmitter = require('events'),
-    port = 5000,
+    cookieParser = require('cookie-parser'),
+    flash = require('flash'),
+    port = process.env.PORT || 5000,
+    session = require('express-session'),
     screenName = 'tonyejack1',
     app = express(),
     fs = require('fs'),
+    timeAgo = require('./public/js/time-ago.js'),
     auth = require('./public/js/config.js'),
     Twit = require('twit'),
     authConfig = auth.config,
@@ -27,6 +31,13 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.set('view engine', 'jade');
 app.set('views', templates);
+app.use(cookieParser('keyboard cat'));
+app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized:true}));
+// use  the flash middleware
+app.use(flash());
 
 var streamTweets = T.stream('statuses/home_timeline');
 
@@ -40,27 +51,37 @@ app.get('/sign-in', function (req, res) {
 });
 
 app.get('/', function(req, res){
-    res.render('sign_in');
+    res.redirect('/sign-in');
 });
 
 app.get('/user', upload.array(), function (req, res) {
-    var user, data;
-    user = {handle: screenName, sign: {url:'/sign-out', text:'Sign Out'}};
-
+    var timeLineData = [], followersData = [];
     setImmediate(function () {
-        T.get('statuses/home_timeline', function (err, data, response) {
-            res.render('index_', {user: user, content: data});
-        });
-        // Get the followers from twitter
-        // T.get('followers/ids', { screen_name: screenName },  function (err, data, response) {
-        //     console.log(data);
-        //
-        // });
+        T.get('statuses/home_timeline').catch(function(err){
+            console.error(err);
+        }).then(function (result) {
+            if (result.resp.statusCode === 200){
+                timeLineData = result.data;
+            }
+            // Get the followers from twitter
+            T.get('followers/list', { screen_name: screenName, count: 20 }).catch(function(err) {
+                console.error(err);
+            }).then(function(result){
+                 if (result.resp.statusCode === 200){
+                     followersData = result.data.users;
+                 }
+                res.render('index_',
+                            {handle: screenName, timeLines: timeLineData,
+                             followers : followersData,
+                             followersCount: followersData.length,
+                             timeAgo : timeAgo});
+            })
+        })
     });
 });
 
 
-app.post('/', upload.array(), function (req, res, next) {
+app.post('/sign-in', upload.array(), function (req, res, next) {
     var body, name, password;
     body = req.body;
     name = body.user_name;
@@ -69,6 +90,8 @@ app.post('/', upload.array(), function (req, res, next) {
     if(name === undefined || password === undefined || password === '' || name === ''){
         res.redirect('/sign-in');
     }else{
+        console.log(name, password);
+        // T.get('account/verify_credentials',
         res.redirect('/user');
     }
 });
@@ -79,34 +102,24 @@ app.get('/sign-in', function (req, res) {
     res.render('sign_in', {user: user});
 });
 
-
-app.listen(port, function () {
-   console.log("Server running on port %d", port);
-});
-
-
 app.post('/post-tweet', upload.array() , function (req, res, next) {
     var body, tweet, success, msg;
     body = req.body;
     tweet = body['text-area'];
-    success = true;
 
     if (tweet !== undefined && tweet !== ""){
         setImmediate(function () {
             T.post('statuses/update', {status: tweet}, function (err, data, response) {
                 if (err) {
-                    success = false;
+                    msg = 'Tweet Unable to be delivered';
                     console.error(err);
+                    res.flash('error', msg);
+                } else{
+                    msg = 'Tweet Sent';
+                    res.flash('info', msg);
                 }
-                console.log(data);
-                console.dir(response);
+                res.redirect('/user');
             });
-            if(success === true) {
-                msg = 'Tweet Sent';
-            }else {
-                msg = 'Tweet Unable to be delivered';
-            }
-            res.render('index_', {success:success, msg: msg});
         });
     }else{
         res.redirect('back');
@@ -125,4 +138,6 @@ app.post('/post-tweet', upload.array() , function (req, res, next) {
 
 
 
-
+app.listen(port, function () {
+    console.log("Server running on port %d", port);
+});

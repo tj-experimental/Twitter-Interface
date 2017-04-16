@@ -3,9 +3,11 @@ extends ./layout.jade
 block content
         div.bounds.app--body
                 div.app--section--header
-                        include partials/_timeline_header.jade
-                        include partials/_following_header.jade
+                        include ./partials/_timeline_header.jade
+                        include ./partials/_following_header.jade
                         include ./partials/_direct_message_header.jade
-
+                include  ./partials/_timeline_body.jade
+                include ./partials/_following_body.jade
+                include ./partials/_direct_message_body.jade
 
         include ./partials/_tweet.jade

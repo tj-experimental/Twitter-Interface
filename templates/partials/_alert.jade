@@ -1,0 +1,8 @@
+if success !== undefined && success === true && msg !== undefined
+    p.alert-success #{msg}
+else if success !== undefined && success === false && msg !== undefined
+    p.alert-warning #{msg}
+
+for message in flash
+    a.alert(class='alert-' + message.type)
+        p #{message.message}
