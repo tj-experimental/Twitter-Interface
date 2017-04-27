@@ -36,7 +36,6 @@
     "twit": "^2.2.5"
   },
   "devDependencies": {
-    "ejs": "^2.5.6",
     "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-config-google": "^0.7.1",

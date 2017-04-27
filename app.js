@@ -1,25 +1,23 @@
-'use strict';
-
-var express = require('express'),
-    path = require('path'),
-    bodyParser = require('body-parser'),
-    EventEmitter = require('events'),
-    cookieParser = require('cookie-parser'),
-    flash = require('flash'),
-    port = process.env.PORT || 5000,
-    session = require('express-session'),
-    screenName = 'tonyejack1',
-    app = express(),
-    fs = require('fs'),
-    timeAgo = require('./public/js/time-ago.js'),
-    auth = require('./public/js/config.js'),
-    Twit = require('twit'),
-    authConfig = auth.config,
-    multer = require('multer'),
-    upload = multer(),
-    T = new Twit(authConfig),
-    templates = path.join(__dirname, 'templates'),
-    staticFiles = path.join(__dirname, '/public' );
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const EventEmitter = require('events');
+const cookieParser = require('cookie-parser');
+const flash = require('flash');
+const port = process.env.PORT || 5000;
+const session = require('express-session');
+const screenName = 'tonyejack1';
+const app = express();
+const fs = require('fs');
+const timeAgo = require('./public/js/time-ago.js');
+const auth = require('./public/js/config.js');
+const Twit = require('twit');
+const authConfig = auth.config;
+const multer = require('multer');
+const upload = multer();
+const T = new Twit(authConfig);
+const templates = path.join(__dirname, 'templates');
+const staticFiles = path.join(__dirname, '/public' );
 
 
 // app.engine('html', require('ejs').renderFile);
@@ -33,7 +31,7 @@ app.set('view engine', 'jade');
 app.set('views', templates);
 app.use(cookieParser('keyboard cat'));
 app.use(session({
-    secret: 'keyboard cat',
+   secret: 'keyboard cat',
     resave: true,
     saveUninitialized:true}));
 // use  the flash middleware
