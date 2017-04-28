@@ -1,9 +1,0 @@
-extends ./layout.jade
-
-block content
-    form(method='POST', action="/", enctype='application/x-www-form-urlencoded')
-        label(for="user_name") User Name
-        input#user_name(type="text")
-        label(for="password") Password
-        input#password(type="password")
-        input#submit(type="submit")
