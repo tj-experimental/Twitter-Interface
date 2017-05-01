@@ -3,13 +3,11 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var EventEmitter = require('events');
 var cookieParser = require('cookie-parser');
 var flash = require('flash');
 var port = process.env.PORT || 5000;
 var session = require('express-session');
 var app = express();
-var fs = require('fs');
 var timeAgo = require('./public/js/time-ago.js');
 var auth = require('./public/js/config.js');
 var Twit = require('twit');
