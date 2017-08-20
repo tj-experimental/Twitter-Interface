@@ -1,4 +1,25 @@
 div.grid-33
     div.app--section
-        ul.app--tweet--list
-            li
+        ul.app--message--list
+            for message in directMessages
+                li
+                h3 Conversation with
+                    a #{' ' + message.sender.name}
+                ul.app--message--conversation
+                    li.app--message
+                        div.app--avatar(style="background-image: url(#{message.sender.profile_image_url})")
+                            img(src="#{message.sender.profile_image_url}")
+                        p.app--message--text #{message.text}
+                            //if message.text.toString().match(httpRex)
+                            //    - var newmsg = message.toString().split(' ')
+                            //        for msg in newmsg
+                            //            if msg.includes('http')
+                            //                msg = '<a href="' + msg + '"><a>'
+                            //        #{newmsg.join(' ')}
+                            //else
+
+
+
+
+
+                        p.app--message--timestamp #{timeAgo.timeAgo(message.created_at)}

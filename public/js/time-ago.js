@@ -5,16 +5,16 @@
 function time_ago(time) {
 
     switch (typeof time) {
-        case 'number':
-            break;
-        case 'string':
-            time = +new Date(time);
-            break;
-        case 'object':
-            if (time.constructor === Date) time = time.getTime();
-            break;
-        default:
-            time = +new Date();
+    case 'number':
+        break;
+    case 'string':
+        time = +new Date(time);
+        break;
+    case 'object':
+        if (time.constructor === Date) time = time.getTime();
+        break;
+    default:
+        time = +new Date();
     }
     var time_formats = [
         [60, 'seconds', 1], // 60
@@ -38,22 +38,24 @@ function time_ago(time) {
         list_choice = 1;
 
     if (seconds === 0) {
-        return 'Just now'
+        return 'Just now';
     }
     if (seconds < 0) {
         seconds = Math.abs(seconds);
         token = 'from now';
         list_choice = 2;
     }
-    var i = 0,
-        format;
-    while (format = time_formats[i++])
+    var i = 0;
+    while (time_formats.length > i){
+        var format = time_formats[i];
         if (seconds < format[0]) {
             if (typeof format[2] === 'string')
                 return format[list_choice];
             else
                 return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
         }
+        i++;
+    }
     return time;
 }
 

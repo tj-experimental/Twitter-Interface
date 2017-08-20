@@ -9,7 +9,8 @@ div.grid-33
                                 div.app--avatar(style="background-image: url(#{follower.profile_image_url})")
                                     img(src="#{follower.profile_image_url}")
                                 h4 #{follower.name}
-                                p #{'@' + follower.screen_name}
+                                p
+                                   a(href="#{follower.url}" target="__blank") #{'@' + follower.screen_name}
                         div.circle--fluid--cell
                             if follower.following
                                 a.button.button-text Unfollow

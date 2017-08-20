@@ -1,4 +1,4 @@
-header.circle--header
+header.circle--header(style="background-image: url(#{bannerUrl || '#'})")
     div.bounds
         div.circle--fluid
             - var logoHref = "/"
@@ -15,5 +15,5 @@ header.circle--header
             div.circle--fluid--cell.align-right
                 nav
                     ul.circle--inline
-                        li.sign-out: a(href="/sign-in") Sign Out
+                        li.sign-out: a(href="/") Sign Out
                 nav

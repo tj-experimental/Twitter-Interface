@@ -1,8 +1,6 @@
-if success !== undefined && success === true && msg !== undefined
-    p.alert-success #{msg}
-else if success !== undefined && success === false && msg !== undefined
-    p.alert-warning #{msg}
+- if(!flash && res.locals !== undefined && res.locals.hasOwnProperty('flash')) flash = res.locals.flash
 
-for message in flash
-    a.alert(class='alert-' + message.type)
-        p #{message.message}
+- for message in flash
+    form.alert-form(method='GET', action="/clear-flash")
+        div.alert.alert-dismissable(class="alert-" + "#{message.type}")
+            strong #{message.message}.
