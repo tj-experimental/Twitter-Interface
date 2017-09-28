@@ -59,7 +59,7 @@ app.get('/', function (req, res) {
 
 app.get('/clear-flash', function (req, res) {
     var backURL=req.header('Referer') || '/';
-    req.session.flash = [];
+    req.session.flash.pop();
     res.redirect(backURL);
 });
 

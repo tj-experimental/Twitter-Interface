@@ -1,7 +1,6 @@
 - if(!flash && res.locals !== undefined && res.locals.hasOwnProperty('flash')) flash = res.locals.flash
 
 - for message in flash
-    form.alert-form(method='GET', action="/clear-flash")
-        - var alertType = "alert-" + message.type
-        div.alert.alert-dismissable(class="#{alertType}")
-            strong #{message.message}.
+    - var alertType = "alert-" + message.type
+    div.alert.alert-dismissable(class="#{alertType}")
+        strong #{message.message}.
