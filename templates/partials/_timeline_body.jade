@@ -7,8 +7,9 @@ div.grid-33
                     a.app--tweet--author
                         div.app--avatar(style="background-image: url(#{timeLine.user.profile_image_url})")
                             img(src="#{timeLine.user.profile_image_url}")
-                        h4 #{timeLine.user.name}
-                        span #{'@' + timeLine.user.screen_name}
+                        h4 #{timeLine.user.name + ' '}
+                        span
+                            a.app--tweet--link(href="https://twitter.com/#{timeLine.user.screen_name}") #{'@' + timeLine.user.screen_name}
                     p #{timeLine.text}
                     ul.app--tweet--actions.circle--list--inline
                         li

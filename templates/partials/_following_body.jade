@@ -10,7 +10,7 @@ div.grid-33
                                     img(src="#{follower.profile_image_url}")
                                 h4 #{follower.name}
                                 p
-                                   a(href="#{follower.url}" target="__blank") #{'@' + follower.screen_name}
+                                   a.app--tweet--link(href="https://twitter.com/#{follower.screen_name}" target="__blank") #{'@' + follower.screen_name}
                         div.circle--fluid--cell
                             if follower.following
                                 a.button.button-text Unfollow

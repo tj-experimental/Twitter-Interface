@@ -3,8 +3,9 @@ div.grid-33
         ul.app--message--list
             for message in directMessages
                 li
-                h3 Conversation with
-                    a #{' ' + message.sender.name}
+                h3 Conversation with #{message.sender.name + ' '}
+                    span
+                        a.app--tweet--link(href="https://twitter.com/#{message.sender_screen_name}" target="__blank") #{'@' + message.sender_screen_name}
                 ul.app--message--conversation
                     li.app--message
                         div.app--avatar(style="background-image: url(#{message.sender.profile_image_url})")
