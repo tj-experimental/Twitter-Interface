@@ -2,5 +2,6 @@
 
 - for message in flash
     form.alert-form(method='GET', action="/clear-flash")
-        div.alert.alert-dismissable(class="alert-" + "#{message.type}")
+        - var alertType = "alert-" + message.type
+        div.alert.alert-dismissable(class="#{alertType}")
             strong #{message.message}.

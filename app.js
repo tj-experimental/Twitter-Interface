@@ -115,10 +115,12 @@ app.get('/user', upload.array(), function (req, res) {
                                                             res.render('index_', {
                                                                 handle: userDetials.screen_name,
                                                                 timeLines: timeLineData,
+                                                                timeLinesCount: timeLineData.length,
                                                                 bannerUrl: banner.url,
                                                                 profileImageUrl: profile.profile_image_url,
                                                                 followers: followersData,
                                                                 directMessages: directMessages,
+                                                                directMessagesCount : directMessages.length,
                                                                 followersCount: followersData.length,
                                                                 timeAgo: timeAgo
                                                             });
@@ -150,7 +152,7 @@ app.post('/sign-in', upload.array(), function (req, res) {
     setImmediate(function () {
         T.get('account/verify_credentials')
             .catch(function (err) {
-                console.error('caught error', err.stack);
+                console.error('Caught error verifying credentials: ', err.stack);
                 res.status(305).render('error');
             }).then(function (result) {
                 userData = result.data;
@@ -175,15 +177,17 @@ app.post('/post-tweet', upload.array(), function (req, res) {
 
     if (tweet !== undefined && tweet !== '') {
         setImmediate(function () {
-            T.post('statuses/update', {status: tweet}, function (err, data, response) {
+            T.post('statuses/update', {status: tweet}, function (err) {
                 if (err) {
-                    console.error(err);
+                    console.error('Caught error updating status', err.stack);
                     msg = 'Tweet Unable to be delivered';
                     req.flash('error', msg);
                 } else {
                     msg = 'Tweet Sent';
-                    req.flash('info', msg);
+                    req.flash('success', msg);
                 }
+                // console.dir(data);
+                // console.dir(response);
                 res.redirect('/user');
             });
         });
