@@ -1,23 +1,28 @@
 'use strict';
 
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var flash = require('flash');
-var port = process.env.PORT || 5000;
-var session = require('express-session');
-var app = express();
-var timeAgo = require('./public/js/time-ago.js');
-var auth = require('./public/js/config.js');
-var Twit = require('twit');
-var authConfig = auth.config;
-var multer = require('multer');
-var MobileDetect = require('mobile-detect');
-var upload = multer();
-var T = new Twit(authConfig);
-var templates = path.join(__dirname, 'templates');
-var staticFiles = path.join(__dirname, '/public');
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const flash = require('flash');
+const port = process.env.PORT || 5000;
+const session = require('express-session');
+const app = express();
+const timeAgo = require('./public/js/time-ago.js');
+const auth = { config: {
+    consumer_key: process.env.CONSUMER_KEY,
+    consumer_secret: process.env.CONSUMER_SECRET,
+    access_token: process.env.ACCESS_TOKEN,
+    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+    timeout_ms: process.env.TIMEOUT_MS
+}};
+const Twit = require('twit');
+const multer = require('multer');
+const MobileDetect = require('mobile-detect');
+const upload = multer();
+const T = new Twit(auth.config);
+const templates = path.join(__dirname, 'templates');
+const staticFiles = path.join(__dirname, '/public');
 
 app.use('/static', express.static(staticFiles));
 app.use(bodyParser.urlencoded({extended: false}));
