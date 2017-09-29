@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     $('.alert').on('click', function () {
         $(this).hide('fast');
-        $.get("/clear-flash");
+        $.get('/clear-flash');
     });
 
 });

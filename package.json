@@ -4,7 +4,7 @@
   "description": "An interface app using twitter RESTful API",
   "main": "app.js",
   "scripts": {
-    "lint": "eslint app.js",
+    "lint": "eslint app.js && eslint .\\public\\js\\*.js",
     "test": "npm run lint"
   },
   "repository": {
