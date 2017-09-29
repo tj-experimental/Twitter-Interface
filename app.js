@@ -14,7 +14,7 @@ const auth = { config: {
     consumer_secret: process.env.CONSUMER_SECRET,
     access_token: process.env.ACCESS_TOKEN,
     access_token_secret: process.env.ACCESS_TOKEN_SECRET,
-    timeout_ms: process.env.TIMEOUT_MS
+    timeout_ms: process.env.TIMEOUT_MS || 10000
 }};
 const Twit = require('twit');
 const multer = require('multer');
