@@ -18,6 +18,8 @@ Also allows users to post a new tweet to their twitter account.
  1. Create new application.
  2. Generate Access Token.
  3. Generate Consumer key.
+ 
+#### Set the application permission to `Read, Write and Access direct messages`
 
 #### Set Required environment variables 
 
