@@ -1,0 +1,32 @@
+{
+  "name": "Twitter-Interface",
+  "scripts": {
+  },
+  "env": {
+    "ACCESS_TOKEN": {
+      "required": true
+    },
+    "ACCESS_TOKEN_SECRET": {
+      "required": true
+    },
+    "CONSUMER_KEY": {
+      "required": true
+    },
+    "CONSUMER_SECRET": {
+      "required": true
+    },
+    "TIMEOUT_MS": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
