@@ -31,4 +31,5 @@ jobs:
       with:
         base-branch: ${{ github.base_ref }}
         config-path: '.eslintrc'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - run: npm test
