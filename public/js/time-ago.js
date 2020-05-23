@@ -3,7 +3,6 @@
  */
 
 function time_ago(time) {
-
     switch (typeof time) {
     case 'number':
         break;
