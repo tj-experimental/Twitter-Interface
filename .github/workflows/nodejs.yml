@@ -27,7 +27,8 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Run ESLint on changed files
-      uses: jackton1/eslint-changed-files@0.0.2
+      uses: jackton1/eslint-changed-files@0.0.3
       with:
+        base-branch: ${{ github.base_ref }}
         config-path: '.eslintrc'
     - run: npm test
