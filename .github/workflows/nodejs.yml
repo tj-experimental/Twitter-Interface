@@ -30,4 +30,5 @@ jobs:
       uses: jackton1/eslint-changed-files@0.0.31
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        config-path: '.eslintrc.json'
     - run: npm test
