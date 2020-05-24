@@ -30,6 +30,6 @@ jobs:
       uses: jackton1/eslint-changed-files@0.1.4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        extensions: '.js,.jsx'
+        extensions: 'js,jsx'
         config-path: '.eslintrc.json'
     - run: npm test
