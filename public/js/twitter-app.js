@@ -12,6 +12,7 @@ $(document).ready(function(){
         $textArea.css('border', 'None');
     });
 
+
     $('.post-form').submit(function (event) {
 
         var tweet = $textArea.val();
