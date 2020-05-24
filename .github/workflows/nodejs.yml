@@ -27,7 +27,7 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: Run ESLint on changed files
-      uses: jackton1/eslint-changed-files@0.1.9
+      uses: jackton1/eslint-changed-files@0.1.10
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         extensions: 'js,jsx'
